@@ -1,0 +1,62 @@
+# Development Notes
+
+## Setup Backend: FastAPI
+### initialize
+uv init
+uv venv
+source .venv/bin/activate
+uv add fastapi
+
+## Start backend
+cd trade-backend/
+uvicorn app.main:app --reload
+uv run uvicorn app.main:app --reload
+curl http://127.0.0.1:8000
+curl http://localhost:8000/revenue?open_price=10&close_price=14
+
+
+## Start backend on k8s
+### Build the container
+cd trade-backend
+docker build -t trade-backend:latest .
+
+### Deploy on Kubernetes
+docker save trade-backend:latest | docker exec -i desktop-control-plane ctr -n=k8s.io images import -
+kubectl apply -f k8s/deployment.yaml
+kubectl get pods -w
+kubectl get svc
+kubectl port-forward svc/trade-backend 8000:8000
+curl "http://localhost:8000/revenue?open_price=10&close_price=14"
+
+### Deploy on Docker (optional)
+docker run --rm -p 8000:8000 trade-backend
+kubectl delete pod -l app=trade-backend
+
+# Manage Kubernetes
+kubectl config get-contexts
+kubectl config use-context docker-desktop
+
+
+# Clean-up kubernetes env
+kubectl delete -f k8s/deployment.yaml
+
+# Alternative for delete when you don't have deployment.yaml
+kubectl delete deployment trade-backend
+kubectl delete service trade-backend
+kubectl delete pod -l app=trade-backend-py
+
+
+## Start frontend
+npm install
+npm run dev
+
+## Run tests
+uv run pytest
+pytest
+
+## Build frontend
+npm run build
+
+## Common Git commands
+git switch dev
+git pull
