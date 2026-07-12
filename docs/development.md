@@ -13,6 +13,10 @@ uvicorn app.main:app --reload
 uv run uvicorn app.main:app --reload
 curl http://127.0.0.1:8000
 curl http://localhost:8000/revenue?open_price=10&close_price=14
+curl -X POST http://localhost:8000/market-price -H "Content-Type: application/json" -d '{"symbol":"AAPL","open_price":10, "high_price":12,"close_price":11}'
+curl http://localhost:8000/market-price
+curl http://localhost:8000/market-price?symbol=AAPL
+curl -X DELETE http://localhost:8000/market-price/AAPL
 
 
 ## Start backend on k8s
