@@ -7,6 +7,9 @@ uv venv
 source .venv/bin/activate
 uv add fastapi
 
+### Test only one test scenario
+uv run pytest tests/test_trade_repository.py -s --log-cli-level=INFO -q 2>&1 | tail -40
+
 ## Start backend
 cd trade-backend/
 uvicorn app.main:app --reload

@@ -2,7 +2,7 @@ import logging
 
 from fastapi import APIRouter, HTTPException
 
-from app.schemas.market_price import MarketPriceIn
+from app.schemas.market_price import MarketPrice
 from app.services.market_price_services import (
     create_market_price,
     list_market_prices,
@@ -15,7 +15,7 @@ router = APIRouter(prefix="/market-price", tags=["market-price"])
 
 
 @router.post("", status_code=201)
-def post_market_price(market_price: MarketPriceIn):
+def post_market_price(market_price: MarketPrice):
     logger.info("insert market_price %s", market_price.symbol)
     try:
         create_market_price(

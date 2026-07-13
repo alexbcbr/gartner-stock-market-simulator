@@ -14,7 +14,7 @@ CREATE TABLE trade (
     CHECK (executed_price >= 0),
     CHECK (open_price >= 0),
     CHECK (closed_price >= 0),
-    CHECK (status_transaction IN (0,1)),
+    CHECK (status_trade IN (0,1)),
 
     FOREIGN KEY (symbol)
         REFERENCES market_price(symbol)

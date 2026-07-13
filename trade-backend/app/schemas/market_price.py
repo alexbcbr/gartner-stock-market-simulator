@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 
 
-class MarketPriceIn(BaseModel):
+class MarketPrice(BaseModel):
     symbol: str
     open_price: float
     high_price: float
