@@ -22,6 +22,7 @@ def post_market_price(market_price: MarketPrice):
             market_price.symbol,
             market_price.open_price,
             market_price.high_price,
+            market_price.low_price,
             market_price.close_price,
         )
     except ValueError as exc:

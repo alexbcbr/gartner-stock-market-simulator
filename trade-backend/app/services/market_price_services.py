@@ -8,13 +8,14 @@ def getRevenue(open_price, close_price):
     return close_price - open_price;
 
 
-def create_market_price(symbol, open_price, high_price, close_price):
+def create_market_price(symbol, open_price, high_price, low_price, close_price):
     try:
         market_price_repository.add(
             MarketPrice(
                 symbol=symbol,
                 open_price=open_price,
                 high_price=high_price,
+                low_price=low_price,
                 close_price=close_price,
             )
         )

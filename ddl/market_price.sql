@@ -2,6 +2,7 @@ CREATE TABLE market_price (
     symbol          TEXT NOT NULL,
     open_price      REAL NOT NULL,
     high_price      REAL NOT NULL,
+    low_price       REAL NOT NULL,
     close_price     REAL NOT NULL,
 
     PRIMARY KEY (symbol),
@@ -10,6 +11,7 @@ CREATE TABLE market_price (
     CHECK (symbol = upper(symbol)),
     CHECK (open_price >= 0),
     CHECK (high_price >= 0),
+    CHECK (low_price >= 0),
     CHECK (close_price >= 0)
 );
 
