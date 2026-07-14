@@ -30,11 +30,13 @@ def prompt_market_price():
         return None
     open_price = float(input("Open price: "))
     high_price = float(input("High price: "))
+    low_price = float(input("Low price: "))
     close_price = float(input("Close price: "))
     return {
         "symbol": symbol,
         "open_price": open_price,
         "high_price": high_price,
+        "low_price": low_price,
         "close_price": close_price,
     }
 

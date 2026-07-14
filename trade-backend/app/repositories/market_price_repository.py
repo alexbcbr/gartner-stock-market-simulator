@@ -6,13 +6,14 @@ def add(market_price: MarketPrice):
     with get_connection() as conn:
         conn.execute(
             """
-            INSERT INTO market_price (symbol, open_price, high_price, close_price)
-            VALUES (?, ?, ?, ?)
+            INSERT INTO market_price (symbol, open_price, high_price, low_price, close_price)
+            VALUES (?, ?, ?, ?, ?)
             """,
             (
                 market_price.symbol,
                 market_price.open_price,
                 market_price.high_price,
+                market_price.low_price,
                 market_price.close_price,
             ),
         )

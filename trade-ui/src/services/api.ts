@@ -96,19 +96,17 @@ export const buyStock = async (request: BuyStockRequest): Promise<Trade> => {
 export interface MarketPrice {
   symbol: string;
   open_price: number;
-  close_price: number;
   highest_price: number;
   lowest_price: number;
-  volume: number;
 }
 
 export const getMarketPrices = async (): Promise<MarketPrice[]> => {
-  const response = await fetch(`${API_BASE_URL}listMarketPrices`);
+  const response = await fetch(`${API_BASE_URL}market-price`);
   return handleResponse<MarketPrice[]>(response);
 };
 
 export const getMarketPrice = async (symbol: string): Promise<MarketPrice> => {
-  const response = await fetch(`${API_BASE_URL}getMarketPrice?symbol=${encodeURIComponent(symbol)}`);
+  const response = await fetch(`${API_BASE_URL}market-price?symbol=${encodeURIComponent(symbol)}`);
   return handleResponse<MarketPrice>(response);
 };
 
