@@ -1,8 +1,18 @@
+"""Baseline financial assistant: no tools, fully synchronous.
+
+Plain chat agent with a system prompt and conversation memory, but tools=[]
+so it can't look up real market data or place trades - it only answers from
+the model's own knowledge. Synchronous throughout (agent.invoke).
+
+See 02fin_assistant_with_tools.py for the MCP-tools version and
+03fin_assistant_async.py for the fully async version.
+"""
+
 from dotenv import load_dotenv
+from langchain.agents import create_agent
 from langchain.chat_models import init_chat_model
 from langchain_core.messages import HumanMessage
 from langgraph.checkpoint.memory import InMemorySaver
-from langgraph.prebuilt import create_react_agent
 
 load_dotenv()
 
@@ -10,14 +20,14 @@ SYSTEM_PROMPT = "You're a financial assistant. Don't answer question outside of 
 
 checkpointer = InMemorySaver()
 
-agent = create_react_agent(
+agent = create_agent(
     model=init_chat_model(
         model='us.anthropic.claude-sonnet-4-5-20250929-v1:0',
         model_provider='bedrock_converse',
         temperature=0.1,
     ),
     tools=[],
-    prompt=SYSTEM_PROMPT,
+    system_prompt=SYSTEM_PROMPT,
     checkpointer=checkpointer,
 )
 
