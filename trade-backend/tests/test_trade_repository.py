@@ -17,7 +17,7 @@ def setup_module_data():
     _clear()
 
 def test_confirm_trade():
-    mp.add(MarketPrice(symbol="GART", open_price=10, high_price=12, close_price=11))
+    mp.add(MarketPrice(symbol="GART", open_price=10, high_price=12, low_price=9, close_price=11))
     trade.add(
         Trade(
             symbol="GART",
